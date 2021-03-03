@@ -1,6 +1,9 @@
 #include "Game.h"
 #include "raylib.h"
 #include "Player.h"
+#include "Agent.h"
+#include "SeekBehaviour.h"
+#include "FleeBehaviour.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -26,8 +29,21 @@ void Game::start()
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
-	Player* player = new Player(10, 10, 5, "Images/player.png", 1);
-	Actor* enemy = new Actor(20, 10, 5, "Images/enemy.png", 1);
+
+	//Makes Agents
+	Player* player = new Player(10, 10, 5, "Images/player.png", 4, 10);
+	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 1, 10);
+
+	//Create a new steering behaviour and adds it to the enemy
+	SeekBehaviour* seek = new SeekBehaviour(player, 1);
+	//enemy->addBehaviour(seek);
+
+	//Add a flee behaviour to the enemy
+	FleeBehaviour* flee = new FleeBehaviour(player, 1);
+	enemy->addBehaviour(flee);
+
+	
+
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);
