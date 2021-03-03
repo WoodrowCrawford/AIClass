@@ -18,14 +18,8 @@ WanderBehaviour::WanderBehaviour(Actor* target, float seekForce)
 
 MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 {
-	//Create a circle in front of the Agent for Random movement
-	//DrawCircle(agent->getWorldPosition().x + 5, agent->getWorldPosition().y + 0, 7, BLUE);
-	//MathLibrary::Vector2* circle = nullptr;
-	//circle = DrawCircleLines
 
-
-
-	
+	MathLibrary::Vector2 circle = MathLibrary::Vector2::normalize(agent->getWorldPosition() + agent->getVelocity());
 
 	//Find the direction to move in
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(m_target->getWorldPosition() - agent->getWorldPosition());
@@ -36,7 +30,7 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 	//Subtract current velocity from desired velocity to find steering force
 	MathLibrary::Vector2 steeringForce = desiredVelocity - agent->getVelocity();
 
-	return steeringForce;
+	return steeringForce; return circle;
 }
 
 void WanderBehaviour::update(Agent* agent, float deltaTime)
