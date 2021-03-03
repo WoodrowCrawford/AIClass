@@ -157,6 +157,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeekBehaviour.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="WanderBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="SeekBehaviour.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SteeringBehaviour.h" />
+    <ClInclude Include="WanderBehaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\bullet.png" />
