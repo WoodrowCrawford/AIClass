@@ -46,9 +46,10 @@ void Game::start()
 
 
 	//Add a wander behaviour to the enemy
-	WanderBehaviour* wander = new WanderBehaviour(player, 1);
+	WanderBehaviour* wander = new WanderBehaviour(player, 13);
 	enemy->addBehaviour(wander);
 
+	
 
 	Scene* scene = new Scene();
 	scene->addActor(player);
