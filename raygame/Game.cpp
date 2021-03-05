@@ -32,7 +32,7 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Makes Agents
-	Player* player = new Player(10, 10, 5, "Images/player.png", 4, 10);
+	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 1, 10);
 
 	//Create a new steering behaviour and adds it to the enemy
@@ -49,7 +49,17 @@ void Game::start()
 	WanderBehaviour* wander = new WanderBehaviour(player, 13);
 	enemy->addBehaviour(wander);
 
-	
+
+
+	//This combines all the behaviours together while the game is running
+	if (player->getVelocity() == enemy->getVelocity())
+	{
+		//enemy->addBehaviour(flee);
+	}
+	else
+	{
+		//enemy->addBehaviour(seek);
+	}
 
 	Scene* scene = new Scene();
 	scene->addActor(player);

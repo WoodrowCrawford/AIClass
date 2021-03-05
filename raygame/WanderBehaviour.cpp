@@ -29,7 +29,7 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(cirleDistance - agent->getWorldPosition() *2);
 	
 	
-
+	
 
 	//Scale the direction vector by the seekForce
 	MathLibrary::Vector2 desiredVelocity = direction * m_seekForce;
