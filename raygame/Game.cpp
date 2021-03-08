@@ -37,7 +37,7 @@ void Game::start()
 
 	//Create a new steering behaviour and adds it to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 1);
-	//enemy->addBehaviour(seek);
+	enemy->addBehaviour(seek);
 
 
 	//Add a flee behaviour to the enemy
@@ -47,7 +47,7 @@ void Game::start()
 
 	//Add a wander behaviour to the enemy
 	WanderBehaviour* wander = new WanderBehaviour(player, 13);
-	enemy->addBehaviour(wander);
+	//enemy->addBehaviour(wander);
 
 
 
