@@ -5,7 +5,6 @@ enum EnemyState
 {
     WANDER,
     SEEK
-
 };
 
 class WanderBehaviour;

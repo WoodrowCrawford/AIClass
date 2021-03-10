@@ -5,14 +5,23 @@
 bool SimpleEnemy::checkTargetInSight()
 {
 	//Check to see if target is null. If so return false 
+	if (getTarget() != NULL)
+	{
 
-	//Find the direction vector that represents where the target is reletive to the enemy
+		//Find the direction vector that represents where the target is reletive to the enemy
+		MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - getWorldPosition();
 
-	//Find the dot product of the enemy's forward and the direction vector
+		//Find the dot product of the enemy's forward and the direction vector
+		direction.dotProduct(Enemy::getForward(), direction);
 
-	//Find the angle using dot product
+		//Find the angle using dot product
+		direction.getNormalized();
 
-	//Check if the angle is greater than the enemy's
+		//Check if the angle is greater than the enemy's
+		
+		//if (direction.getNormalized() > )
+	}
+	
  
 	return false;
 }
@@ -36,7 +45,7 @@ void SimpleEnemy::start()
 
 	//Initialize member variables
 	m_seek = getBehaviour<SeekBehaviour>();
-	m_wander = getBehaviour<WanderBehaviour>();
+	//m_wander = getBehaviour<WanderBehaviour>();
 
 	setTarget(Enemy::getTarget());
 }
