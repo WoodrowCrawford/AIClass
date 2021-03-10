@@ -9,17 +9,23 @@ bool SimpleEnemy::checkTargetInSight()
 	{
 
 		//Find the direction vector that represents where the target is reletive to the enemy
-		MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - getWorldPosition();
+		MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - Agent::getWorldPosition();
 
 		//Find the dot product of the enemy's forward and the direction vector
-		direction.dotProduct(Enemy::getForward(), direction);
+		MathLibrary::Vector2 enemyForward = Enemy::getForward();
+		enemyForward.dotProduct(direction, enemyForward);
 
 		//Find the angle using dot product
+	
+		
 		direction.getNormalized();
 
 		//Check if the angle is greater than the enemy's
+		if (direction.getNormalized() > enemyForward.getNormalized())
+		{
+			return true;
+		}
 		
-		//if (direction.getNormalized() > )
 	}
 	
  
@@ -45,7 +51,7 @@ void SimpleEnemy::start()
 
 	//Initialize member variables
 	m_seek = getBehaviour<SeekBehaviour>();
-	//m_wander = getBehaviour<WanderBehaviour>();
+	m_wander = getBehaviour<WanderBehaviour>();
 
 	setTarget(Enemy::getTarget());
 }
@@ -53,6 +59,12 @@ void SimpleEnemy::start()
 void SimpleEnemy::update(float deltaTime)
 {
 	//Create a switch statement for the state machine
+	switch (Behaviour)
+	{
+	default:
+		Behaviour = addBehaviour(WANDER)
+	}
+	
 	//The switch should transition to the wander state if the target is not in sight.
 	//You can set the wander force to be whatever value you see fit but be sure to
 	//set the seek force to be 0.
