@@ -24,9 +24,12 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 
 
 
-	//Find the direction to move in
-	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(cirleDistance - agent->getWorldPosition() *2);
-	//MathLibrary::Vector2 vector =(cos(rand), sin(rand));
+	//Makes the direction vector random for the circle distance
+	MathLibrary::Vector2 direction = 
+	
+
+	//MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(cirleDistance - agent->getWorldPosition() *2);
+	
 	
 
 	//Scale the direction vector by the seekForce

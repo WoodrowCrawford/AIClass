@@ -21,10 +21,12 @@ bool SimpleEnemy::checkTargetInSight()
 		direction.getNormalized();
 
 		//Check if the angle is greater than the enemy's
-		if (direction.getNormalized() > enemyForward.getNormalized())
-		{
-			return true;
-		}
+		 
+		
+		//if (direction.getNormalized() > enemyForward.getNormalized())
+		//{
+			//return true;
+		//}
 		
 	}
 	
@@ -59,11 +61,7 @@ void SimpleEnemy::start()
 void SimpleEnemy::update(float deltaTime)
 {
 	//Create a switch statement for the state machine
-	switch (Behaviour)
-	{
-	default:
-		Behaviour = addBehaviour(WANDER)
-	}
+	
 	
 	//The switch should transition to the wander state if the target is not in sight.
 	//You can set the wander force to be whatever value you see fit but be sure to
