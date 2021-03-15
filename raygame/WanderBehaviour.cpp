@@ -20,20 +20,15 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 {
 	//Makes a circle distance in front of the Agent
 	MathLibrary::Vector2 cirleDistance = agent->getForward() * 30;
-
-
+	
 
 
 	//Makes the direction vector random for the circle distance
-	MathLibrary::Vector2 direction = 
-	
-
-	//MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(cirleDistance - agent->getWorldPosition() *2);
+	MathLibrary::Vector2 direction = MathLibrary::Vector2::normalize(cirleDistance - agent->getWorldPosition() *2);
 	
 	
-
 	//Scale the direction vector by the seekForce
-	MathLibrary::Vector2 desiredVelocity = direction * m_seekForce;
+     MathLibrary::Vector2 desiredVelocity = direction * m_seekForce;
 
 	//Subtract current velocity from desired velocity to find steering force
 	MathLibrary::Vector2 steeringForce = desiredVelocity - agent->getVelocity();

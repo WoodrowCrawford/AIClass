@@ -25,6 +25,8 @@ void ComplexEnemy::setTarget(Actor* target)
 	m_fleeBehaviour->setTarget(target);
 }
 
+
+//What happpens when the enemy and player collide with each other
 void ComplexEnemy::onCollision(Actor* other)
 {
 	Enemy::onCollision(other);
@@ -43,12 +45,60 @@ void ComplexEnemy::onCollision(Actor* other)
 	}
 }
 
+//Checks to see if the target is in sight
 bool ComplexEnemy::checkTargetInSight(float angle)
 {
-	return false;
+	//Check to see if target is null. If so return false 
+
+	if (getTarget())
+	{
+		MathLibrary::Vector2 enemyForward;
+		MathLibrary::Vector2 angle;
+
+		//Find the direction vector that represents where the target is reletive to the enemy
+		MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - Agent::getWorldPosition();
+
+		//Find the dot product of the enemy's forward and the direction vector
+		angle.dotProduct(enemyForward, direction);
+
+		//Find the angle using dot product
+
+
+		//Check if the angle is greater than the enemy's
+		if (angle.findAngle(angle, enemyForward))
+		{
+			return true;
+		}
+
+
+	};
+
 }
 
+//Check if the target is in range of the enemy
 bool ComplexEnemy::checkTargetInRange(float range)
 {
-	return false;
+	if (getTarget())
+	{
+		MathLibrary::Vector2 enemyForward;
+		MathLibrary::Vector2 range;
+
+		//Find the direction vector that represents where the target is reletive to the enemy
+		MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - Agent::getWorldPosition();
+
+		//Find the dot product of the enemy's forward and the direction vector
+		range.dotProduct(enemyForward, direction);
+
+		//Find the angle using dot product
+
+
+		//Check if the angle is greater than the enemy's
+		if (range.findAngle(range, enemyForward))
+		{
+			return true;
+		}
+
+
+	};
+
 }
