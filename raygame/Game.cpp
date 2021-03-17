@@ -9,6 +9,7 @@
 #include "SeekDecision.h"
 #include "FleeDecision.h"
 #include "ComplexEnemy.h"
+#include "graph.h"
 
 
 bool Game::m_gameOver = false;
@@ -38,6 +39,11 @@ void Game::start()
 	m_camera->offset = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
 	m_camera->target = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
 	m_camera->zoom = 1;
+
+
+
+	//STEERING BEHAVIOURS SCENE START
+
 
 	//Makes Agents
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
@@ -81,14 +87,32 @@ void Game::start()
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);
+
+	//STEERING BEHAVIOURS SCENE END
+
+
+
+	//PATHFINDING SCENE START
+
+	Graph* graph = new Graph(5, 5, 5, 1);
+
+	Scene* pathFinding = new Scene();
+	pathFinding->addActor(graph);
+
+	//PATHFINDING SCENE END
+
 	addScene(scene);
+	
+	m_currentSceneIndex = addScene(pathFinding);
 	SetTargetFPS(60);
+
+	
 }
 
 
 void Game::update(float deltaTime)
 {
-	getCurrentScene
+	getCurrentScene()->update(deltaTime);
 }
 
 void Game::draw()

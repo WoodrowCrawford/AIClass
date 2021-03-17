@@ -14,7 +14,7 @@ public:
     Node* connectedNode1;
     Node* connectedNode2;
     float cost;
-    void draw();
+    void draw() override;
     void update(float deltaTime) override;
 };
 

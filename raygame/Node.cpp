@@ -21,3 +21,13 @@ void Node::draw()
 			edges[i]->draw();
 	}
 }
+
+void Node::update(float deltaTime)
+{
+	Actor::update(deltaTime);
+
+	
+	for (int i = 0; i < edges.size(); i++)
+		if (edges[i]->connectedNode1->graphPosition == graphPosition)
+			edges[i]->update(deltaTime);
+}
