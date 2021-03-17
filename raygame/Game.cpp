@@ -53,7 +53,7 @@ void Game::start()
 	ComplexEnemy* complexEnemy = new ComplexEnemy(20, 20, 1, "Images/enemy.png", player);
 	SeekDecision* seekDecision = new SeekDecision();
 	FleeDecision* fleeDecision = new FleeDecision();
-	DecisionBehaviour* decisionBehaviour = new DecisionBehaviour(seekdecision);
+	DecisionBehaviour* decisionBehaviour = new DecisionBehaviour(seekDecision);
 
 	complexEnemy->addBehaviour(decisionBehaviour);
 

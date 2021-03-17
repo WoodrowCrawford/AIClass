@@ -1,5 +1,6 @@
 #include "Node.h"
 #include "Edge.h"
+#include <raylib.h>
 
 Node::Node(int x, int y, int nodeSize)
 {
@@ -25,9 +26,11 @@ void Node::draw()
 void Node::update(float deltaTime)
 {
 	Actor::update(deltaTime);
-
-	
+	//Update all edges connected to this node
 	for (int i = 0; i < edges.size(); i++)
+	{
+		//Checks if the node is the first connected node to prevent the edge from updating twice
 		if (edges[i]->connectedNode1->graphPosition == graphPosition)
 			edges[i]->update(deltaTime);
+	}
 }
