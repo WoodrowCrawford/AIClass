@@ -71,6 +71,15 @@
     <ClCompile Include="FleeDecision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -134,6 +143,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FleeDecision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
