@@ -71,7 +71,7 @@ bool ComplexEnemy::checkTargetInSight(float angle)
 		}
 
 
-	};
+	}
 
 }
 

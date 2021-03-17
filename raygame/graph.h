@@ -12,6 +12,7 @@ public:
 	void draw() override;
 	void update(float deltaTime) override;
 	void BFS(int startX, int startY, int goalX, int goalY);
+	void DJA(int startX, int startY, int goalX, int goalY);
 
 private:
 	Node* getNode(int xPos, int yPos);

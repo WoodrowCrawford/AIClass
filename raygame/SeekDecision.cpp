@@ -1,5 +1,6 @@
 #include "SeekDecision.h"
 #include "ComplexEnemy.h"
+#include "SeekBehaviour.h"
 
 void SeekDecision::makeDecision(Agent* agent, float deltaTime)
 {

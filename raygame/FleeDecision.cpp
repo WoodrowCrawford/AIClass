@@ -1,5 +1,6 @@
 #include "FleeDecision.h"
 #include "ComplexEnemy.h"
+#include "FleeBehaviour.h"
 
 void FleeDecision::makeDecision(Agent* agent, float deltaTime)
 {

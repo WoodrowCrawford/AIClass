@@ -3,6 +3,7 @@
 #include "Edge.h"
 #include <deque>
 
+
 Graph::Graph(int width, int height, int nodeSize, int nodeSpacing)
 {
 	m_width = width;
@@ -108,7 +109,7 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 
 		for (int i = 0; i < m_nodes.size(); i++)
 		{
-			if (m_nodes[i]->graphPostition == MathLibrary::Vector2(xPos, yPos))
+			if (m_nodes[i]->graphPosition == MathLibrary::Vector2(xPos, yPos))
 				return m_nodes[i];
 		}
 
