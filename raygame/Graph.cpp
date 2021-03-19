@@ -102,6 +102,87 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 }
 
 
+//Dijkstra's algorithm
+void Graph::DJA(int startX, int startY, int goalX, int goalY)
+{
+	Node* start = getNode(startX, startY);
+	Node* goal = getNode(goalX, goalY);
+
+	if (!start || !goal)
+	{
+		return;
+	}
+
+	start->color = ColorToInt(GREEN);
+
+	Node* currentNode = start;
+
+	std::deque<Node*> openList;
+	std::deque<Node*> closedList;
+
+	openList.push_front(start);
+
+	while (!openList.empty())
+	{
+		for (int i = 0; i < start->edges.size(); i++)
+		{
+			start->draw();
+		}
+
+		currentNode = openList[0];
+
+		if (currentNode == goal)
+		{
+			goal->visited = true;
+			goal->color = ColorToInt(YELLOW);
+			return;
+		}
+
+		//openList.pop_back[0];
+		openList[0] = closedList[0];
+
+		for (int i = 0; i < currentNode->edges.size(); i++)
+		{
+			Node* endEdge = nullptr;
+			if (endEdge->edges[1])
+			{
+				endEdge->edges[0];
+			}
+			else
+			{
+				endEdge->edges[1];
+			}
+
+			if (endEdge = closedList[i])
+			{
+				float gScore = currentNode->edges.size();
+
+				if (endEdge = openList[i])
+				{
+					endEdge->visited;
+					endEdge->color = ColorToInt(YELLOW);
+
+					gScore = gScore + currentNode->edges.size();
+					endEdge = currentNode;
+					openList.push_front(endEdge);
+				}
+
+				else if (gScore < endEdge->edges.size())
+				{
+					endEdge->visited;
+					endEdge->color = ColorToInt(YELLOW);
+					gScore = gScore + currentNode->edges.size();
+
+				}
+			}
+
+			
+		}
+	}
+
+}
+
+
 	Node* Graph::getNode(int xPos, int yPos)
 	{
 		if (xPos < 0 || xPos > m_width || yPos < 0 || yPos > m_height)
@@ -136,6 +217,8 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 			addChild(currentNode);
 			m_nodes.push_back(currentNode);
 
+
+
 			//Connect the node to all nodes in range
 			for (int j = 0; j < m_nodes.size(); j++)
 			{
@@ -143,7 +226,7 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 				MathLibrary::Vector2 displacement = m_nodes[j]->graphPosition - currentNode->graphPosition;
 
 				//Check if the magnitude of the displacement is farther than the maximum 
-				if (displacement.getMagnitude() <= 1.42f && displacement.getMagnitude() > 0)
+				if (displacement.getMagnitude() <= 1.42 && displacement.getMagnitude() > 0)
 				{
 					//Create a new edge that connects the two nodes
 					Edge* currentEdge = new Edge(m_nodes[j], currentNode);
