@@ -49,40 +49,31 @@ void Game::start()
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 1, 10);
 	
-	//Makes a complex enemy with multiple behaviours
+	
+	//Makes a complex enemy and multiple behaviours for it
 	ComplexEnemy* complexEnemy = new ComplexEnemy(20, 20, 1, "Images/enemy.png", player);
 	SeekDecision* seekDecision = new SeekDecision();
 	FleeDecision* fleeDecision = new FleeDecision();
 	DecisionBehaviour* decisionBehaviour = new DecisionBehaviour(seekDecision);
 
+	//Adds the behaviours to the complex enemy
 	complexEnemy->addBehaviour(decisionBehaviour);
 
 
-	//Create a new steering behaviour and adds it to the enemy
+	//Makes a seek behaviour to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 1);
-	//enemy->addBehaviour(seek);
 
-
-	//Add a flee behaviour to the enemy
+	//Makes a flee behaviour to the enemy
 	FleeBehaviour* flee = new FleeBehaviour(player, 1);
-	//enemy->addBehaviour(flee);
 
-
-	//Add a wander behaviour to the enemy
+	//Makes a wander behaviour to the enemy
 	WanderBehaviour* wander = new WanderBehaviour(player, 13);
+
+	//Adds the given behaviours to the simple enemy
 	enemy->addBehaviour(wander);
-
-
-
-	//This combines all the behaviours together while the game is running
-	if (player->getVelocity() == enemy->getVelocity())
-	{
-		//enemy->addBehaviour(flee);
-	}
-	else
-	{
-		//enemy->addBehaviour(seek);
-	}
+     //enemy->addBehaviour(flee);
+	//enemy->addBehaviour(seek);
+	
 
 	Scene* scene = new Scene();
 	scene->addActor(player);
@@ -93,9 +84,10 @@ void Game::start()
 
 
 	//PATHFINDING SCENE START
-
-	Graph* graph = new Graph(5, 5, 5, 1);
-
+	//Makes the starting graph for pathfinding
+	Graph* graph = new Graph(10, 10, 10, 1);
+	
+	graph->BFS(1, 1, 10, 10);
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
 
@@ -103,6 +95,8 @@ void Game::start()
 
 	addScene(scene);
 	
+
+	//Adds either "scene" or "PathFinding to the scene
 	m_currentSceneIndex = addScene(pathFinding);
 	SetTargetFPS(60);
 

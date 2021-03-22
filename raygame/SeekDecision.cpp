@@ -15,9 +15,6 @@ void SeekDecision::makeDecision(Agent* agent, float deltaTime)
 		enemy->getFlee();
 		
 	}
-	if (enemy->checkTargetInSight())
-	{
-		enemy->getBehaviour<SeekBehaviour>();
-	}
+	
 	
 }

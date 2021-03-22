@@ -60,6 +60,7 @@ void SimpleEnemy::start()
 
 void SimpleEnemy::update(float deltaTime)
 {
+	
 	//Create a switch statement for the state machine
 	
 	
