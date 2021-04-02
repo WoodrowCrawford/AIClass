@@ -47,20 +47,18 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 	//Set the iterator to be the start node
 	Node* currentNode = start;
 
-
 	//Create a queue to store the nodes
 	std::deque<Node*> queue;
-
 	//Add the start node to the queue
 	queue.push_front(start);
 
-
-	//Search for the goal wjile the
+	//Search for the goal while the queue isn't empty
 	while (!queue.empty())
 	{
+		//Set the current node to be the first item in the queue
 		currentNode = queue[0];
+		//Remove the first item from the queue
 		queue.pop_front();
-
 
 		//Check if the iterator is the goal node
 		if (currentNode == goal)
@@ -70,25 +68,17 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 			return;
 		}
 
-
-		//If the node wasn't the goal loop through its edges to get its neighbors
+		//If the node wasn't the goal loop through its edges to get its neighbours
 		for (int i = 0; i < currentNode->edges.size(); i++)
 		{
-
 			//Create a pointer to store the node at the other end of the edge
 			Node* currentEdgeEnd = nullptr;
 
-
 			//Set the pointer to be the opposite end of the edge
 			if (currentNode == currentNode->edges[i]->connectedNode2)
-			{
-				currentEdgeEnd == currentNode->edges[i]->connectedNode1;
-			}
+				currentEdgeEnd = currentNode->edges[i]->connectedNode1;
 			else
-			{
-				currentEdgeEnd = currentEdgeEnd->edges[i]->connectedNode2;
-			}
-
+				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
 
 			//If the node at the opposite end hasn't been visited mark it as visited and add it to the queue
 			if (!currentEdgeEnd->visited)
@@ -179,7 +169,7 @@ void Graph::DJA(int startX, int startY, int goalX, int goalY)
 			
 		}
 	}
-
+	
 }
 
 

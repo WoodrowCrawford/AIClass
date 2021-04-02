@@ -20,6 +20,8 @@ int Game::m_screenWidth = 1024;
 int Game::m_screenHeight = 720;
 
 
+
+
 Game::Game()
 {
 	m_gameOver = false;
@@ -44,17 +46,18 @@ void Game::start()
 
 	//STEERING BEHAVIOURS SCENE START
 
-
 	//Makes Agents
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 1, 10);
 	
+
 	
 	//Makes a complex enemy and multiple behaviours for it
 	ComplexEnemy* complexEnemy = new ComplexEnemy(20, 20, 1, "Images/enemy.png", player);
 	SeekDecision* seekDecision = new SeekDecision();
 	FleeDecision* fleeDecision = new FleeDecision();
 	DecisionBehaviour* decisionBehaviour = new DecisionBehaviour(seekDecision);
+
 
 	//Adds the behaviours to the complex enemy
 	complexEnemy->addBehaviour(decisionBehaviour);
@@ -66,15 +69,15 @@ void Game::start()
 	//Makes a flee behaviour to the enemy
 	FleeBehaviour* flee = new FleeBehaviour(player, 1);
 
+
 	//Makes a wander behaviour to the enemy
 	WanderBehaviour* wander = new WanderBehaviour(player, 13);
 
-	//Adds the given behaviours to the simple enemy
-	enemy->addBehaviour(wander);
-     //enemy->addBehaviour(flee);
-	//enemy->addBehaviour(seek);
+	//Adds the seek behaviour to the simple enemy
+	enemy->addBehaviour(seek);
+   
 	
-
+	//Makes the scene
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);
@@ -83,11 +86,14 @@ void Game::start()
 
 
 
+
 	//PATHFINDING SCENE START
+	
+	
 	//Makes the starting graph for pathfinding
 	Graph* graph = new Graph(10, 10, 10, 1);
-	
-	graph->BFS(1, 1, 10, 10);
+	graph->setWorldPostion({ 2,2 });
+	graph->DJA(0, 0, 4, 4);
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
 
@@ -97,9 +103,9 @@ void Game::start()
 	
 
 	//Adds either "scene" or "PathFinding to the scene
-	m_currentSceneIndex = addScene(pathFinding);
+	//m_currentSceneIndex = addScene(pathFinding);
 	SetTargetFPS(60);
-
+	m_currentSceneIndex = addScene(pathFinding);
 	
 }
 
