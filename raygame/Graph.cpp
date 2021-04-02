@@ -2,7 +2,7 @@
 #include "Node.h"
 #include "Edge.h"
 #include <deque>
-
+#include <algorithm>
 
 Graph::Graph(int width, int height, int nodeSize, int nodeSpacing)
 {
@@ -93,84 +93,114 @@ void Graph::BFS(int startX, int startY, int goalX, int goalY)
 
 
 //Dijkstra's algorithm
-void Graph::DJA(int startX, int startY, int goalX, int goalY)
+std::vector<Node*>Graph::DJA(int startX, int startY, int goalX, int goalY)
 {
-	Node* start = getNode(startX, startY);
+	std::deque<Node*> path;
+
+
+	//Create a node pointer that points to the start node
+	Node* start = getNode(startX, startX);
+
+	//Create a node pointer that points to the goal node
 	Node* goal = getNode(goalX, goalY);
 
-	if (!start || !goal)
-	{
-		return;
-	}
 
+	//Check if the start or the goal pointer is null
+	if (!start || !goal)
+		return;
+	//return an empty list
+     //end if statement
+
+    //Set the start nodes color to be green
 	start->color = ColorToInt(GREEN);
 
-	Node* currentNode = start;
+	//Create a node pointer that will be act as an iterator for the graph
+	Node* current = nullptr;
 
+	//Create an open list
 	std::deque<Node*> openList;
+
+	//Create a closed list
 	std::deque<Node*> closedList;
 
+	//Add start to the open list
 	openList.push_front(start);
 
-	while (!openList.empty())
+	//Loop while the open list is not empty
+	while (!openList.size() == 0)
 	{
-		for (int i = 0; i < start->edges.size(); i++)
-		{
-			start->draw();
-		}
 
-		currentNode = openList[0];
+		//Sort the items in the open list by the g score
+		std::sort(openList.begin(), openList.end(), current->gScore);
 
-		if (currentNode == goal)
+
+		//Set the iterator to be the first item in the open list
+		current = openList[0];
+
+		//Check if the iterator is pointing to the goal node
+		if (current == goal)
 		{
-			goal->visited = true;
-			goal->color = ColorToInt(YELLOW);
+			//Mark the goal as being found by changing its color 
+			goal->visited == true;
+
+			//Return the new path found
 			return;
 		}
+		//end if statement
 
-		//openList.pop_back[0];
-		openList[0] = closedList[0];
+		//Pop the first item off the open list
+		openList.pop_front();
 
-		for (int i = 0; i < currentNode->edges.size(); i++)
+		//Add the first item to the closed list
+		closedList.push_front(current);
+
+		//Loop through all of the edges for the iterator
+		for (int i = 0; i < current->edges.size(); i++)
 		{
-			Node* endEdge = nullptr;
-			if (endEdge->edges[1])
-			{
-				endEdge->edges[0];
-			}
-			else
-			{
-				endEdge->edges[1];
-			}
+			//Create a node pointer to store the other end of the edge
+			Node* otherEdge = nullptr;
 
-			if (endEdge = closedList[i])
-			{
-				float gScore = currentNode->edges.size();
+			//Check if the iterator is on the second end of the node
+			if )
+		 
+				//Set the edge end pointer to be the first end of the node
+			//Otherwise if the iterator is on the first end of the node...
+				//set the edge end pointer to be the second end of the node
+			// end if statement
 
-				if (endEdge = openList[i])
-				{
-					endEdge->visited;
-					endEdge->color = ColorToInt(YELLOW);
+			//Check if node at the end of the edge is in the closed list
 
-					gScore = gScore + currentNode->edges.size();
-					endEdge = currentNode;
-					openList.push_front(endEdge);
-				}
+				//Create an int and set it to be the g score of the iterator plus the cost of the edge
 
-				else if (gScore < endEdge->edges.size())
-				{
-					endEdge->visited;
-					endEdge->color = ColorToInt(YELLOW);
-					gScore = gScore + currentNode->edges.size();
 
-				}
-			}
+				//Check if the node at the end ofthe edge is in the open list
+
+					//Mark the node as visited by changing its color
+					//Set the nodes g score to be the g score calculated earlier
+					//Set the nodes previous to be the iterator
+					//Add the node to the open list
+
+				//Otherwise if the g score is less than the node at the end of the edge's g score...
+
+					//Mark the node as visited by changing its color
+					//Set its g score to be the g score calculated earlier
+					//Set its previous to be the current node
+
+				//end if statement
+		//end loop
+	//end loop
+		}
 
 			
-		}
 	}
-	
+
+
+
+
+
+	return std::vector<Node*>();
 }
+
 
 
 	Node* Graph::getNode(int xPos, int yPos)
