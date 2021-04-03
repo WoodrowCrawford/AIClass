@@ -9,6 +9,7 @@
 #include "SeekDecision.h"
 #include "FleeDecision.h"
 #include "ComplexEnemy.h"
+#include "SimpleEnemy.h"
 #include "graph.h"
 
 
@@ -49,7 +50,7 @@ void Game::start()
 	//Makes Agents
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1, 10);
 	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 1, 10);
-	
+	SimpleEnemy* simpleEnemy = new SimpleEnemy(20, 10, 1, "Images/enemy,png", player, 2, 1, 1, 1);
 
 	
 	//Makes a complex enemy and multiple behaviours for it
@@ -73,9 +74,10 @@ void Game::start()
 	//Makes a wander behaviour to the enemy
 	WanderBehaviour* wander = new WanderBehaviour(player, 13);
 
-	//Adds the seek behaviour to the simple enemy
+	//Adds the seek behaviour to the enemy
 	enemy->addBehaviour(seek);
    
+	
 	
 	//Makes the scene
 	Scene* scene = new Scene();
@@ -93,7 +95,7 @@ void Game::start()
 	//Makes the starting graph for pathfinding
 	Graph* graph = new Graph(10, 10, 10, 1);
 	graph->setWorldPostion({ 2,2 });
-	graph->DJA(0, 0, 4, 4);
+	graph->BFS(0, 0, 4, 4);
 	Scene* pathFinding = new Scene();
 	pathFinding->addActor(graph);
 
@@ -105,7 +107,7 @@ void Game::start()
 	//Adds either "scene" or "PathFinding to the scene
 	//m_currentSceneIndex = addScene(pathFinding);
 	SetTargetFPS(60);
-	m_currentSceneIndex = addScene(pathFinding);
+	m_currentSceneIndex = addScene(scene);
 	
 }
 

@@ -135,7 +135,7 @@ std::vector<Node*>Graph::DJA(int startX, int startY, int goalX, int goalY)
 
 
 		//Set the iterator to be the first item in the open list
-		current = openList[0];
+		current == openList[1];
 
 		//Check if the iterator is pointing to the goal node
 		if (current == goal)
@@ -208,7 +208,7 @@ std::vector<Node*>Graph::DJA(int startX, int startY, int goalX, int goalY)
 					otherEdge->visited == true;
 					
 					//Set its g score to be the g score calculated earlier
-					otherEdge->gScore == gScore;
+					otherEdge->gScore = gScore;
 					
 					//Set its previous to be the current node
 					otherEdge->previous == current;

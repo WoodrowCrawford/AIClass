@@ -4,33 +4,23 @@
 
 bool SimpleEnemy::checkTargetInSight()
 {
-	//Check to see if target is null. If so return false 
-	if (getTarget() != NULL)
-	{
+	//checks if target is null. if so return false
+	if (getTarget() == NULL)
+		return false;
+	//find the direction vector that represent where the target is relative to the enemy
+	MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - getWorldPosition();
 
-		//Find the direction vector that represents where the target is reletive to the enemy
-		MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - Agent::getWorldPosition();
+	//find the dot product of the enemy's forward and direction vector
+	MathLibrary::Vector2::dotProduct(getTarget()->getForward(), direction);
 
-		//Find the dot product of the enemy's forward and the direction vector
-		MathLibrary::Vector2 enemyForward = Enemy::getForward();
-		enemyForward.dotProduct(direction, enemyForward);
+	//find the angle using the dot product 
+	float angle = (float)MathLibrary::Vector2::findAngle(getTarget()->getForward(), direction);
 
-		//Find the angle using dot product
-	
-		
-		direction.getNormalized();
-
-		//Check if the angle is greater than the enemy's
-		 
-		
-		//if (direction.getNormalized() > enemyForward.getNormalized())
-		//{
-			//return true;
-		//}
-		
-	}
-	
- 
+	//check if that angle is greater than the enemy's  viewing angle(any value you see fit is fine)
+	if (angle > 2)
+		//returns if the enemy saw something
+		return true;
+	//returns if the enemy saw nothing
 	return false;
 }
 
@@ -49,7 +39,7 @@ void SimpleEnemy::start()
 	Enemy::start();
 
 	//Set the default state of the enemy
-	m_currentState = WANDER;
+	m_currentState = STATE_WANDER;
 
 	//Initialize member variables
 	m_seek = getBehaviour<SeekBehaviour>();
@@ -60,15 +50,36 @@ void SimpleEnemy::start()
 
 void SimpleEnemy::update(float deltaTime)
 {
-	
+
 	//Create a switch statement for the state machine
-	
-	
-	//The switch should transition to the wander state if the target is not in sight.
-	//You can set the wander force to be whatever value you see fit but be sure to
-	//set the seek force to be 0.
-	
-	//The switch should transition to the seek 
+
+	switch (EnemyState::STATE_SEEK, EnemyState::STATE_WANDER)
+	{
+	case STATE_SEEK:
+		if (checkTargetInSight() == true)
+		{
+			m_currentState = STATE_SEEK;
+		}
+		break;
+
+	case STATE_WANDER:
+		if (checkTargetInSight() == false)
+		{
+			m_currentState = STATE_WANDER;
+			m_seek->setForceScale(0);
+			m_wander->setForceScale(3);
+			break;
+		}
+
+
+		//The switch should transition to the wander state if the target is not in sight.
+		//You can set the wander force to be whatever value you see fit but be sure to
+		//set the seek force to be 0.
+
+		//The switch should transition to the seek 
+	}
+
+	Enemy::update(deltaTime);
 }
 
 void SimpleEnemy::setTarget(Actor* target)

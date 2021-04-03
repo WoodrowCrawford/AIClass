@@ -3,8 +3,8 @@
 
 enum EnemyState
 {
-    WANDER,
-    SEEK
+   STATE_WANDER,
+    STATE_SEEK
 };
 
 class WanderBehaviour;
@@ -25,7 +25,7 @@ class SimpleEnemy :
 
 private:
 
-    EnemyState m_currentState;
+    EnemyState  m_currentState;
     WanderBehaviour* m_wander;
     SeekBehaviour* m_seek;
 };
